@@ -20,30 +20,27 @@
         @endif
 
         <div class="card">
-          <h5 class="card-header">All Rooms</h5>        
+          <h5 class="card-header">All Room Types</h5>        
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
-            <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room</a>
+            <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room Types</a>
             </div>
           <div class="table-responsive text-nowrap">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>S no.</th>
-                  <th>Name</th>
+                  <th>Room Type</th>
                   <th>Capacity</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody class="table-border-bottom-0">
-              @foreach ($room as $key => $item)         
+              @foreach ($type as $key => $item)         
               <tr>
                   <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{  ++ $key }}</strong></td>
                   <td>{{ $item->name }}</td>
-                  @foreach($type as $key => $t)
-                    @if($t['id'] == $item['room_type_id'])
-                      <td>{{ $t->name }}</td>
-                    @endif
-                  @endforeach
+                  <td>{{ $item->capacity }}</td>
+
                   <td>
                     
                     <div class="dropdown">
@@ -73,7 +70,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel3">Add Room</h5>
+                    <h5 class="modal-title" id="exampleModalLabel3">Add Room Type</h5>
                     <button
                     type="button"
                     class="btn-close"
@@ -81,31 +78,18 @@
                     aria-label="Close"
                     ></button>
                 </div>
-            <form method="post" action="{{route('room.store')}}" enctype="multipart/form-data">
+            <form method="post" action="{{route('type.store')}}" enctype="multipart/form-data">
                 @csrf    
                 <div class="modal-body">
                     <div class="row g-2">
-                    <div class="col mb-0">
-                        <label for="emailLarge" class="form-label">Room Name</label>
-                        <input type="text" id="emailLarge" class="form-control" name="name" />
-                    </div>
-                    <div class="col mb-0">
-                        <label for="dobLarge" class="form-label">Room Type</label>
-                        <select class="form-select" name="room_type_id">
-                          @foreach($type as $key => $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
-                          @endforeach
-                        </select>
-                    </div>
-                    </div>
-                    <div class="row g-2">
-                    <div class="col mb-0">
-                        <label for="" class="form-label">Status</label>
-                        <select class="form-select" name="status">
-                            <option value="0">Available</option>
-                            <option value="1">Full</option>
-                        </select>
-                    </div>                    
+                        <div class="col mb-0">
+                            <label for="emailLarge" class="form-label">Room Type</label>
+                            <input type="text" id="emailLarge" class="form-control" name="name" />
+                        </div>
+                        <div class="col mb-0">
+                            <label for="dobLarge" class="form-label">Capacity</label>
+                            <input type="number" max=4 min=1 id="dobLarge" class="form-control" name="capacity"  />
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -151,7 +135,7 @@
 <script type="text/javascript">
   function destroy(id){
         var form=$('#delete_form');
-        var address='{{url('/roles')}}'+'/'+id;
+        var address='{{url('/type')}}'+'/'+id;
         form.prop('action',address)
     }
 </script>

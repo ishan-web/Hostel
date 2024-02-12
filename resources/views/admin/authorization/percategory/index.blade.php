@@ -21,9 +21,7 @@
         <div class="card">
           <h5 class="card-header">All Permission</h5>        
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
-              @can('percategory-add')
               <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#large-modal">Add Permission Category</a>
-              @endcan
             </div>
           <div class="table-responsive text-nowrap">
             <table class="table table-striped">

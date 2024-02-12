@@ -50,6 +50,15 @@
       
             </li>
 
+            <li class="menu-item">
+              <a href="{{url('type')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Room Type</div>
+              </a>
+      
+            </li>
+
+
             <li class="menu-item @if(Session::get('topmenu')=='auth') {{'open'}} @endif">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>

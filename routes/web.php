@@ -9,6 +9,7 @@ use App\Http\Controllers\roleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::middleware(['auth','isAdmin'])->group(function(){
     Route::resource('users', UserController::class);
     Route::resource('vehicles', VehicleController::class);
     Route::resource('room', RoomController::class);
+    Route::resource('type',RoomTypeController::class);
 
 });
 

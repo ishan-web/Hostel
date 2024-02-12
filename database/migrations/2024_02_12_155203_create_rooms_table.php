@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('capacity');
-            $table->boolean('status')->default(0);
+            $table->unsignedBigInteger('room_type_id');
+            $table->foreign('room_type_id')->references('id')->on('room_types');
+            $table->boolean('status')->default(true);            
             $table->timestamps();
         });
     }
