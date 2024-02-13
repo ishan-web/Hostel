@@ -31,6 +31,7 @@
                   <th>S no.</th>
                   <th>Name</th>
                   <th>Capacity</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -44,6 +45,15 @@
                       <td>{{ $t->name }}</td>
                     @endif
                   @endforeach
+                  @if($item['status'] == 0)
+                  <td>
+                    Available
+                  </td>
+                  @else
+                  <td>
+                    Full                  
+                  </td>
+                  @endif
                   <td>                    
                     <div class="dropdown">
                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

@@ -29,7 +29,7 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        if(Auth::user()->user_type == 'driver'){
+        if(Auth::user()->user_type == 'student'){
 
             return '/home';
         }

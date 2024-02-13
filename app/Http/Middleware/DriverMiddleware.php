@@ -17,7 +17,7 @@ class DriverMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(Auth::user()->user_type == "driver"){
+        if(Auth::user()->user_type == "student"){
             return $next($request);
         }
         else{

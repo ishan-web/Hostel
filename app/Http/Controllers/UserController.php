@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use App\Models\Rooms;
+
 use DB;
 use Hash;
 use Session;
@@ -23,8 +25,11 @@ class UserController extends Controller
         Session::put('topmenu','auth');
         Session::put('menu','user');
         $roles = Role::pluck('name','name')->all();
-        $data = User::orderBy('id','DESC')->paginate(5);
-        return view('admin.authorization.users.index',compact('data','roles'))
+        $data = User::orderBy('id','DESC')->where('user_type', 'student')->paginate(5);
+        $rooms = Rooms::where('status','0')->get();
+
+        // echo'<pre>'; print_r($rooms); exit;
+        return view('admin.authorization.users.index',compact('data','roles','rooms'))
                 ->with('i', ($request->input('page', 1) - 1) * 5);    }
 
     public function store(Request $request)
@@ -33,7 +38,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'room_id' => 'required'
         ]);
     
         $user = new User();
@@ -41,6 +46,8 @@ class UserController extends Controller
         $user->name = $request->name;
 
         $user->email = $request->email;
+
+        $user->room_id = $request->room_id;
 
         $user->password = Hash::make($request->password);
 
@@ -58,12 +65,13 @@ class UserController extends Controller
             $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email,'.$id,
-                'roles' => 'required'
+                'room_id' => 'required'
             ]);
         
             $user = User::find($id);
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->room_id = $request->input('room_id');
             $user->user_type = implode(',', $request->input('roles'));
 
             $user->syncRoles($request->input('roles'));
