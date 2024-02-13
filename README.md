@@ -103,3 +103,8 @@ $table->unsignedBigInteger('room_id')->nullable();
 $table->foreign('room_id')->references('id')->on('rooms');
 $table->timestamps();
 });
+
+# Data Base changed
+
+-Added permission_category_id in 'permission'table
+-room_id in 'users'table
