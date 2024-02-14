@@ -107,4 +107,5 @@ $table->timestamps();
 # Data Base changed
 
 -Added permission_category_id in 'permission'table
--room_id in 'users'table
+-room_id, student_id in 'u sers'table
+-remaining in 'room_types'

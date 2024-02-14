@@ -33,7 +33,6 @@
                     <th>S no.</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Room No.</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -46,13 +45,13 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
 
-                    @foreach($rooms as $key=> $room)
+                  {{--  @foreach($rooms as $key=> $room)
                       @if($room['id'] = $user->room_id)
                         <td>{{$room['name']}}</td>
                         @else
                         <td>Empty</td>
-                      @endif
-                    @endforeach
+                      @endif 
+                    @endforeach --}}
                     
                     <td>
                       <div class="dropdown">
@@ -60,7 +59,7 @@
                           <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu">
-                          <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="edit('{{$user->id}}','{{$user->name}}','{{$user->email}}','{{$user->roles->pluck(['name'])->implode(',')}}','{{$user->room_id}}')">Edit</a>
+                          <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="edit('{{$user->id}}','{{$user->name}}','{{$user->email}}','{{$user->roles->pluck(['name'])->implode(',')}}')">Edit</a>
 
                           <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$user->id}}')">Delete</a>
                         </div>
@@ -73,11 +72,6 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>  
                     
-                    @foreach($rooms as $key=> $room)
-                      @if($room['id'] = $user->room_id)
-                        <td>{{$room['name']}}</td>
-                      @endif
-                    @endforeach
                     @if($user->id==Auth::user()->id)
                     <td>
                     <div class="dropdown">
@@ -85,7 +79,7 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" data-toggle="modal" data-target="#edit-modal" onclick="edit('{{$user->id}}','{{$user->name}}','{{$user->email}}','{{$user->roles->pluck('name')->implode(',')}}','{{$user->room_id}}')">Edit</a>              
+                        <a class="dropdown-item" data-toggle="modal" data-target="#edit-modal" onclick="edit('{{$user->id}}','{{$user->name}}','{{$user->email}}','{{$user->roles->pluck('name')->implode(',')}}')">Edit</a>              
                       </div>
                       </div>
                     </td>
@@ -133,7 +127,7 @@
             <label>Confirm Password <span class="text-red">*</span></label>
             {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
           </div>
-          <div class="form-group col-6">
+          {{-- <div class="form-group col-6">
             <label for="defaultFormControlInput" class="form-label">Assign Room <span class="text-red">*</span></label>
               <select class="form-select" name="room_id" id="defaultSelect">
                 <option>Assign Room.....</option>
@@ -141,7 +135,7 @@
                   <option value="{{$room->id}}">{{$room->name}}</option>
                 @endforeach
               </select>
-          </div>
+          </div> --}}
           <div class="form-group col-6" hidden>
             <label>Select Role <span class="text-red">*</span></label>
             {!! Form::select('roles[]', $roles,[], array('class' => 'form-control')) !!}
@@ -172,22 +166,13 @@
       @method('patch')
       <div class="modal-body">
         <div class="row gutters-15">
-          <div class="form-group col-6">
+        <div class="col-md-6">
             <label>Name <span class="text-red">*</span></label>
             {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control','id'=>'name')) !!}
           </div>
-          <div class="form-group col-6">
+          <div class="col-md-6">
             <label>Email <span class="text-red">*</span></label>
             {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control','id'=>'email')) !!}
-          </div>
-          <div class="form-group col-6">
-            <label for="defaultFormControlInput" class="form-label">Assign Room <span class="text-red">*</span></label>
-              <select class="form-select" name="room_id" id="room_id">
-                <option>Assign Room.....</option>
-                @foreach($rooms as $key=>$room)
-                  <option value="{{$room->id}}">{{$room->name}}</option>
-                @endforeach
-              </select>
           </div>
           <div class="form-group col-6" hidden>
             <label>Select Role <span class="text-red">*</span></label>
@@ -237,13 +222,12 @@
 <script src="{{asset('js/adminjs/select2.min.js')}}"></script>
 
 <script type="text/javascript">
-  function edit(id,name,email,roles,room_id)){
+  function edit(id,name,email,roles){
     $('#name').val(name);
     $('#email').val(email);
     $('#roles').val(roles).change();
-    $('#room_id').val(room_id).change();
     var form=$('#edit-form');
-        var address='{{url('users')}}'+'/'+id; 
+    var address='{{url('users')}}'+'/'+id; 
         form.prop('action',address)
   }
 
