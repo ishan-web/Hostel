@@ -111,3 +111,6 @@ $table->timestamps();
 -Added permission_category_id in 'permission'table
 -room_id, student_id in 'u sers'table
 -remaining in 'room_types'
+
+# create user,
+ add student details with user_id, add student to room , room with capacity
