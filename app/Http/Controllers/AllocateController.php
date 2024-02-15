@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 use App\Models\Student_Room_Model;
 use App\Models\StdDetails;
-
+use Illuminate\Support\Facades\Validator;
 use App\Models\Rooms;
 use App\Models\Users;
 use Session;
+use Illuminate\Http\Response; // Import Response class
+
 
 use Illuminate\Http\Request;
 
@@ -28,20 +30,37 @@ class AllocateController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'student_id' => 'required|integer|unique:student__room__models,student_id',
+            'room_id' => 'required|integer',
+        ]);
+    
+        if ($validator->fails()) {
+            // Get the validation errors
+            $errors = $validator->errors()->all();
+            
+            // Store errors in session flash data
+            return redirect()->back()->with(['errors' => $errors]);
+        }
+        
+     
+        $studentId = $request->student_id;
+        $roomId = $request->room_id;
+    
+        $allocate = new Student_Room_Model();
+        $allocate->insert($studentId, $roomId);
+    
+        if ($allocate) {
+            return redirect()->back()->with('success', 'Student added successfully');
+        } else {
+            return redirect()->back()->with('failed', 'Room is packed');
+        }
     }
+    
 
     /**
      * Display the specified resource.

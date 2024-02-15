@@ -6,21 +6,32 @@
   <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
       
+      @if ($errors = Session::get('errors'))
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              @foreach ($errors as $error)
+                  {{ $error }}<br>
+              @endforeach
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+
       @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-          {{ $message }}          
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        
-        @elseif($message = Session::get('failure'))
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          {{ $message}}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
+          <div class="alert alert-success alert-dismissible" role="alert">
+              {{ $message }}          
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+
+      @if ($message = Session::get('failure'))
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              {{ $message}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+
 
         <div class="card">
-          <h5 class="card-header">All Rooms</h5>       
+          <h5 class="card-header">Students with Rooms</h5>       
 
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
             <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room</a>
@@ -47,7 +58,7 @@
                   @endforeach
 
                   @foreach($room as $key => $t)
-                    @if($t['id'] == $item['rooom_id'])
+                    @if($t['id'] == $item['room_id'])
                       <td>{{ $t->name }}</td>
                     @endif
                   @endforeach
@@ -94,7 +105,7 @@
                     <div class="row g-2">
                     <div class="col mb-0">
                         <label for="dobLarge" class="form-label">Rooms</label>
-                        <select class="form-select" name="room_type_id">
+                        <select class="form-select" name="room_id">
                           @foreach($room as $key => $item)
                             <option value="{{$item->id}}">{{$item->name}}</option>
                           @endforeach
@@ -147,15 +158,3 @@
 
 @endsection
 
-
-@section('scripts')
-
-<script type="text/javascript">
-  function destroy(id){
-        var form=$('#delete_form');
-        var address='{{url('/roles')}}'+'/'+id;
-        form.prop('action',address)
-    }
-</script>
-
-@endsection
