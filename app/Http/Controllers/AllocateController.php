@@ -48,34 +48,35 @@ class AllocateController extends Controller
         }
         
      
-        $studentId = $request->student_id;
-        $roomId = $request->room_id;
+        $data = [
+            'room_id' =>$request->room_id,
+            'student_id' => $request->student_id
+        ];
+
+        $room = $request->room_id;
     
         $allocate = new Student_Room_Model();
-        $allocate->insert($studentId, $roomId);
-    
-        if ($allocate) {
+        $result = $allocate->insert($data, $room);
+
+
+        if ($result) {
             return redirect()->back()->with('success', 'Student added successfully');
         } else {
-            return redirect()->back()->with('failed', 'Room is packed');
+            return redirect()->back()->with('failure', 'Room is packed');
         }
     }
     
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $room = Rooms::all();
+        $students = StdDetails::all();
+        $allocate = Student_Room_Model::findOrFail($id);  
+
+        return view('admin.allocate.edit', compact('room','allocate','students'));
     }
 
     /**
@@ -83,7 +84,36 @@ class AllocateController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'student_id' => 'required|integer',
+            'room_id' => 'required|integer',
+        ]);
+    
+        if ($validator->fails()) {
+            // Get the validation errors
+            $errors = $validator->errors()->all();
+            
+            // Store errors in session flash data
+            return redirect()->back()->with(['errors' => $errors]);
+        }
+        
+     
+        $data = [
+            'room_id' =>$request->room_id,
+            'student_id' => $request->student_id
+        ];
+
+        $room = $request->room_id;
+        $allocate = Student_Room_Model::findOrFail($id);
+        $allocate->update($data);
+
+
+        if ($allocate) {
+            return redirect()->to('allocate')->with('success', 'Student updated successfully');
+        } else {
+            return redirect()->to('allocate')->with('failed', 'Room is packed');
+        }
     }
 
     /**
