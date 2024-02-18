@@ -4,14 +4,32 @@
 
 <div class="content-wrapper">
   <div class="container-xxl flex-grow-1 container-p-y">
-      
+  @if ($errors = Session::get('errors'))
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              @foreach ($errors as $error)
+                  {{ $error }}<br>
+              @endforeach
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+
+      @if ($message = Session::get('success'))
+          <div class="alert alert-success alert-dismissible" role="alert">
+              {{ $message }}          
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+
+      @if ($message = Session::get('failure'))
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              {{ $message}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Edit Room</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" style="margin:10px;" href="{{ route('allocate.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -42,7 +60,7 @@
         </div>                    
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <a class="btn btn-primary" style="margin:10px;" href="{{ route('allocate.index') }}"> Back</a>
         <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">Submit</button>
     </div>
 </form>

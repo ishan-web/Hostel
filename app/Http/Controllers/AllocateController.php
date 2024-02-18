@@ -62,6 +62,7 @@ class AllocateController extends Controller
         if ($result) {
             return redirect()->back()->with('success', 'Student added successfully');
         } else {
+                        
             return redirect()->back()->with('failure', 'Room is packed');
         }
     }
@@ -104,15 +105,13 @@ class AllocateController extends Controller
             'student_id' => $request->student_id
         ];
 
-        $room = $request->room_id;
         $allocate = Student_Room_Model::findOrFail($id);
-        $allocate->update($data);
+        $result = $allocate->update($data, ['id' => $id]);
 
-
-        if ($allocate) {
+        if ($result) {
             return redirect()->to('allocate')->with('success', 'Student updated successfully');
         } else {
-            return redirect()->to('allocate')->with('failed', 'Room is packed');
+            return redirect()->back()->with('failure', 'Room is packed');
         }
     }
 
@@ -120,7 +119,22 @@ class AllocateController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
+{
+    // Find the allocation record by its ID
+    $allocate = Student_Room_Model::findOrFail($id);
+    
+    // Delete the allocation record
+    $allocate->delete();
+    
+    // Check if the allocation record was successfully deleted
+    if($allocate)
     {
-        //
+        return redirect()->to('allocate')->with('success', 'Student deleted successfully');
     }
+    else 
+    {
+        return redirect()->to('allocate')->with('error', 'Student deletion failed');
+    }
+}
+
 }

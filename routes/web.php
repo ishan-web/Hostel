@@ -11,6 +11,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\AllocateController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,7 @@ Route::middleware(['auth','isAdmin'])->group(function(){
     Route::resource('room', RoomController::class);
     Route::resource('type', RoomTypeController::class);
     Route::resource('allocate', AllocateController::class);
+    Route::resource('student', StudentController::class);
 
 });
 

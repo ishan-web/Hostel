@@ -6,6 +6,14 @@
   <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
       
+      @if ($errors = Session::get('errors'))
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              @foreach ($errors as $error)
+                  {{ $error }}<br>
+              @endforeach
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
       @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
           {{ $message }}          
@@ -78,7 +86,7 @@
 </div>
 <!--/ Striped Rows -->
 
-<div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
+      <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                 <div class="modal-header">

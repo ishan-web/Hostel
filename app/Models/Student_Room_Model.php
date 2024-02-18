@@ -35,6 +35,7 @@ class Student_Room_Model extends Model
                 ->groupBy('rooms.id')
                 ->first(); // Retrieve the first row of the result
 
+                
             // Check if $total is null
             if ($total !== null) {
                 // The query returned a valid result, so continue with your logic
@@ -45,15 +46,16 @@ class Student_Room_Model extends Model
 
                 if ($total->total < $room_type->capacity) {
                     \DB::table('student__room__models')->insert($data);
+                    return true;
                 }
                 else{
                     return false;
                 }
             } else {
 
-                \DB::table('student__room__models')->insert($data);
-            
-            }           
+                \DB::table('student__room__models')->insert($data); 
+                return true;           
+            }          
         
         }
         
@@ -73,17 +75,24 @@ class Student_Room_Model extends Model
                 // Retrieve the room type information
                 $room_type = \DB::table('room_types')
                     ->join('rooms', 'rooms.room_type_id', '=', 'room_types.id')
-                    ->where('rooms.id', $room)
+                    ->where('rooms.id', $data['room_id'])
                     ->first();
         
                 // Check if the total number of students is less than the room capacity
                 if ($total->total < $room_type->capacity) {
                     // If the condition is met, proceed with the update
-                    \DB::table('student__room__models')->update($data);
+                    \DB::table('student__room__models')->where('id', $options['id'])->update($data);
+                    return true;
+                }
+                else
+                {
+                    return false;
+
                 }
             } else {
                 // If there are no students allocated to the room, proceed with the update directly
-                \DB::table('student__room__models')->update($data);
+                \DB::table('student__room__models')->where('id', $options['id'])->update($data);
+                return true;
             }
         }
         

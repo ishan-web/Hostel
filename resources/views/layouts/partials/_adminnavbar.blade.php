@@ -66,6 +66,14 @@
       
             </li>
 
+            <li class="menu-item">
+              <a href="{{url('student')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Student Details</div>
+              </a>
+      
+            </li>
+
 
             <li class="menu-item @if(Session::get('topmenu')=='auth') {{'open'}} @endif">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
