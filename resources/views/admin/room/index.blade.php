@@ -68,7 +68,7 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('room.edit',$item->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                      <a class="dropdown-item" href="{{ route('room.edit',$item->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
 
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$item->id}}')"><i class="bx bx-trash me-1"></i> Delete</button>
                       </div>
@@ -136,7 +136,6 @@
             </div>
         </div>
 
-
   <!-- Modal -->
     <div class="modal fade" id="delete-modal" data-bs-backdrop="static" tabindex="-1">
       <div class="modal-dialog">
@@ -166,9 +165,14 @@
 @section('scripts')
 
 <script type="text/javascript">
+
+
+
+
+
   function destroy(id){
         var form=$('#delete_form');
-        var address='{{url('/roles')}}'+'/'+id;
+        var address='{{url('/room')}}'+'/'+id;
         form.prop('action',address)
     }
 </script>

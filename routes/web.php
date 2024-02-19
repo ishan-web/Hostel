@@ -39,7 +39,6 @@ Route::middleware(['auth','isAdmin'])->group(function(){
     Route::resource('type', RoomTypeController::class);
     Route::resource('allocate', AllocateController::class);
     Route::resource('student', StudentController::class);
-
 });
 
 Route::middleware(['auth','isDriver'])->group(function(){

@@ -25,36 +25,33 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $room = new Rooms();
-        $room->name = $request->name;
-        $room->room_type_id = $request->room_type_id;
-        $room->status = $request->status;
-        
-        return $room->save()?redirect()->back()->with('success','Room created successfully') : redirect()->back()->with('failure','Room Creation failed');
+
+            $room = new Rooms();
+            $room->name = $request->name;
+            $room->room_type_id = $request->room_type_id;
+            $room->status = $request->status;
+            
+            return $room->save()?redirect()->back()->with('success','Room created successfully') : redirect()->back()->with('failure','Room Creation failed');
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $room = Rooms::findOrFail($id);
+        $type = Room_types::all();
+        return view('admin.room.edit', compact('room','type'));
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $room = Rooms::findOrFail($id);
+        $room->name = $request->name;
+        $room->room_type_id = $request->room_type_id;
+        $room->status = $request->status;
+        
+        return $room->save()?redirect()->back()->with('success','Room Updated successfully') : redirect()->back()->with('failure','Room Update failed');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

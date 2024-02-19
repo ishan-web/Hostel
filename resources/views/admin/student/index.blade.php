@@ -184,10 +184,10 @@
       <div class="modal-dialog">
         <form class="modal-content" id="delete_form" method="post" action="">
           <div class="modal-header">
-            <h5 class="modal-title" id="backDropModalTitle">Delete Students and Room?</h5>
+            <h5 class="modal-title" id="backDropModalTitle">Delete Student Details?</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>           
           </div>
-            <p  style="margin-left: 20px; margin-top: 20px;">Are You sure You want to delete this student's room ?</p>
+            <p  style="margin-left: 20px; margin-top: 20px;">Are You sure You want to delete this student's details ?</p>
             <div class="modal-footer">
                   {{csrf_field()}}
                   {{method_field('DELETE')}}

@@ -31,7 +31,9 @@ class RoomTypeController extends Controller
   
     public function edit(string $id)
     {
-        //
+        $type = Room_types::findOrFail($id);
+        return view('admin.type.edit', compact('type'));
+
     }
 
     /**
@@ -39,7 +41,10 @@ class RoomTypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $type = Room_types::findOrFail($id);
+        $type->name = $request->name;
+        $type->capacity = $request->capacity;
+        return $type->save()?redirect()->back()->with('success','Room Type updated successfully') : redirect()->back()->with('failure','Room Type update failed');
     }
 
     /**
