@@ -54,4 +54,21 @@ class RoomController extends Controller
         return $room->save()?redirect()->back()->with('success','Room Updated successfully') : redirect()->back()->with('failure','Room Update failed');
     }
 
+    public function destroy(string $id)
+    {
+        $room = Rooms::findOrFail($id);
+        
+        $room->delete();
+        
+        // Check if the allocation record was successfully deleted
+        if($room)
+        {
+            return redirect()->back()->with('success', 'Room deleted successfully');
+        }
+        else 
+        {
+            return redirect()->back()->with('error', 'Room deletion failed');
+        }
+    }
+
 }

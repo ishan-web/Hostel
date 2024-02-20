@@ -7,7 +7,16 @@
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
-        
+        @if ($errors = Session::get('errors'))
+        <div class="alert alert-danger alert-dismissible" role="alert">
+              <ul>
+                  @foreach ($errors as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
+
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
           {{ $message }}          
@@ -45,14 +54,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
 
-                  {{--  @foreach($rooms as $key=> $room)
-                      @if($room['id'] = $user->room_id)
-                        <td>{{$room['name']}}</td>
-                        @else
-                        <td>Empty</td>
-                      @endif 
-                    @endforeach --}}
-                    
+                
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -127,15 +129,7 @@
             <label>Confirm Password <span class="text-red">*</span></label>
             {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
           </div>
-          {{-- <div class="form-group col-6">
-            <label for="defaultFormControlInput" class="form-label">Assign Room <span class="text-red">*</span></label>
-              <select class="form-select" name="room_id" id="defaultSelect">
-                <option>Assign Room.....</option>
-                @foreach($rooms as $key=>$room)
-                  <option value="{{$room->id}}">{{$room->name}}</option>
-                @endforeach
-              </select>
-          </div> --}}
+         
           <div class="form-group col-6" hidden>
             <label>Select Role <span class="text-red">*</span></label>
             {!! Form::select('roles[]', $roles,[], array('class' => 'form-control')) !!}

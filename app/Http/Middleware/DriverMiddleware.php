@@ -14,14 +14,17 @@ class DriverMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, Closure $next)
     {
-
-        if(Auth::user()->user_type == "student"){
+        if (Auth::check() && Auth::user()->user_type == "student") {
             return $next($request);
-        }
-        else{
+        } elseif (Auth::check()) {
+            // User is authenticated but not a student, redirect them to dashboard
+            return redirect('/dashboard');
+        } else {
+            // User is not authenticated, redirect them to login page
             return redirect('/login');
         }
     }
+    
 }

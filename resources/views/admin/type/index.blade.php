@@ -87,6 +87,10 @@
                             <input type="text" id="emailLarge" class="form-control" name="name" />
                         </div>
                         <div class="col mb-0">
+                            <label class="form-label">Cost</label>
+                            <input type="text"  class="form-control" name="cost" />
+                        </div>
+                        <div class="col mb-0">
                             <label for="dobLarge" class="form-label">Capacity</label>
                             <input type="number" max=4 min=1 id="dobLarge" class="form-control" name="capacity"  />
                         </div>

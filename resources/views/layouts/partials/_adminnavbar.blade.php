@@ -22,20 +22,20 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Vehicle</div>
+                <div data-i18n="Layouts">Digital Record</div>
               </a>
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="{{url('vehicles')}}" class="menu-link">
+                  <a href="{{url('record')}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-table"></i>
-                    <div data-i18n="Tables">Vehicle Setup</div>
+                    <div data-i18n="Tables">Students Check IN/Out</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="tables-vehicle-list.html" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-table"></i>
-                    <div data-i18n="Tables">Vehicle List</div>
+                    <div data-i18n="Tables">Attendance</div>
                   </a>
                 </li>
               </ul>

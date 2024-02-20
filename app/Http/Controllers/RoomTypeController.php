@@ -25,6 +25,8 @@ class RoomTypeController extends Controller
         $type = new Room_types();
         $type->name = $request->name;
         $type->capacity = $request->capacity;
+        $type->cost = $request->cost;
+
         return $type->save()?redirect()->back()->with('success','Room Type created successfully') : redirect()->back()->with('failure','Room Type Creation failed');
     }
 
@@ -44,6 +46,8 @@ class RoomTypeController extends Controller
         $type = Room_types::findOrFail($id);
         $type->name = $request->name;
         $type->capacity = $request->capacity;
+        $type->cost = $request->cost;
+
         return $type->save()?redirect()->back()->with('success','Room Type updated successfully') : redirect()->back()->with('failure','Room Type update failed');
     }
 

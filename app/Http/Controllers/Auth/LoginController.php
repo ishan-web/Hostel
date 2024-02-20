@@ -20,8 +20,9 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
-
+    use AuthenticatesUsers {
+        authenticated as protected traitAuthenticated;
+    }
     /**
      * Where to redirect users after login.
      *
@@ -29,18 +30,21 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        if(Auth::user()->user_type == 'student'){
-
-            return '/home';
+        $userType = Auth::user()->user_type;
+        
+        // Debug statement to check the user type
+    
+        if ($userType == 'student') {
+            return '/feed';
+        } elseif ($userType == 'superadmin' || $userType == 'admin' || $userType == 'manager') {
+            return '/dashboard';
+        } else {
+            return '/login';
         }
-    else if (Auth::user()->user_type == 'superadmin' || Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'agency' || Auth::user()->user_type == 'trader' || Auth::user()->user_type == 'factory') {
+    }
 
-            return '/dashboard';        
-    }
-    else{
-        return '/login';
-    }
-    }
+    
+
     /**
      * Create a new controller instance.
      *
@@ -49,5 +53,12 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+
+    public function page()
+    {
+        return redirect()->to('login');
+
     }
 }

@@ -41,10 +41,16 @@
             @method('PATCH')
             <div class="row">
 
-                <div class="col-md-6 col-xl-6 mb-4">
-                    <label for="emailLarge" class="form-label">Room Type</label>
+                    <div class="col-md-6 col-xl-6 mb-4">
+                        <label for="emailLarge" class="form-label">Room Type</label>
                         <div class="col-md-8"> <!-- Changed col-md-6 to col-md-8 -->
-                        <input type="text" id="emailLarge" value="{{$type->name}}" class="form-control" name="name" />
+                            <input type="text" id="emailLarge" value="{{$type->name}}" class="form-control" name="name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-6 mb-4">
+                        <label for="emailLarge" class="form-label">Cost</label>
+                        <div class="col-md-8"> <!-- Changed col-md-6 to col-md-8 -->
+                            <input type="text" id="emailLarge" value="{{$type->cost}}" class="form-control" name="cost" />
                         </div>
                     </div>
 

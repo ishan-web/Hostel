@@ -23,13 +23,7 @@ class AdminMiddleware
         else if(Auth::user()->user_type == 'admin'){
             return $next($request);
         }
-        else if(Auth::user()->user_type == 'agency'){
-            return $next($request);
-        }
-        else if(Auth::user()->user_type == 'trader'){
-            return $next($request);
-        }
-        else if(Auth::user()->user_type == 'factory'){
+        else if(Auth::user()->user_type == 'manager'){
             return $next($request);
         }
         else{

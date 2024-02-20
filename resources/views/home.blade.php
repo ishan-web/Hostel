@@ -1,6 +1,6 @@
-@extends('layouts.adminmaster')
+@extends('layouts.studentmaster')
 
-@section('content')
+@section('usercontent')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

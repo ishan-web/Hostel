@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 
 use DB;
@@ -32,13 +33,20 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+    $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'room_id' => 'required'
         ]);
-    
+
+        if ($validator->fails()) {
+            // Get the validation errors
+            $errors = $validator->errors()->all();
+            
+            // Store errors in session flash data
+            return redirect()->back()->with(['errors' => $errors]);
+        }
         $user = new User();
 
         $user->name = $request->name;
@@ -50,6 +58,7 @@ class UserController extends Controller
         $user->user_type = implode(',', $request->input('roles'));
 
         $user->assignRole($request->input('roles'));
+
 
         return $user->save()?redirect()->back()->with('success','User saved successfully') : redirect()->back()->with('failure','Save User failed');
 
