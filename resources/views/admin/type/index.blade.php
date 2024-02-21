@@ -22,8 +22,11 @@
         <div class="card">
           <h5 class="card-header">All Room Types</h5>        
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
+            @if(Auth::user()->user_type == 'manager')
+
             <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room Types</a>
-            </div>
+            @endif
+          </div>
           <div class="table-responsive text-nowrap">
             <table class="table table-striped">
               <thead>
@@ -31,6 +34,7 @@
                   <th>S no.</th>
                   <th>Room Type</th>
                   <th>Capacity</th>
+                  <th>Cost / Monthly</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -40,10 +44,13 @@
                   <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{  ++ $key }}</strong></td>
                   <td>{{ $item->name }}</td>
                   <td>{{ $item->capacity }}</td>
+                  <td>Rs. {{ $item->cost }}</td>
 
                   <td>
-                    
+                  @if(Auth::user()->user_type == 'manager')
+
                     <div class="dropdown">
+
                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
@@ -52,7 +59,8 @@
 
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$item->id}}')"><i class="bx bx-trash me-1"></i> Delete</button>
                       </div>
-                    </div>                      
+                    </div>  
+                    @endif                    
                   </td>
                 </tr>              
               @endforeach
@@ -113,10 +121,10 @@
       <div class="modal-dialog">
         <form class="modal-content" id="delete_form" method="post" action="">
           <div class="modal-header">
-            <h5 class="modal-title" id="backDropModalTitle">Delete Permission Group?</h5>
+            <h5 class="modal-title" id="backDropModalTitle">Delete Room Type?</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>           
           </div>
-            <p  style="margin-left: 20px; margin-top: 20px;">Are You sure You want to delete this Permission Group?</p>
+            <p  style="margin-left: 20px; margin-top: 20px;">Are You sure You want to delete this Room Type?</p>
             <div class="modal-footer">
                   {{csrf_field()}}
                   {{method_field('DELETE')}}

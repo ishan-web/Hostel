@@ -65,11 +65,11 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Dhuwani</span>
+                  <span class="app-brand-text demo text-body fw-bolder">Hostel</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Dhuwani! 👋</h4>
+              <h4 class="mb-2">Welcome to Hostel! 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
               <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
@@ -95,11 +95,7 @@
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">{{ __('Password') }}</label>
-                    @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}">
-                        <small>{{ __('Forgot Password?') }}</small>
-                        </a>
-                    @endif
+                  
                   </div>
                   <div class="input-group input-group-merge">
                     <input
@@ -130,12 +126,7 @@
                 </div>
               </form>
 
-              <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="{{route('register')}}">
-                  <span>Create an account</span>
-                </a>
-              </p>
+              
             </div>
           </div>
           <!-- /Register -->

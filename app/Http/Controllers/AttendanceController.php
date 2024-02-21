@@ -12,6 +12,14 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:view-attendance', ['only' => ['index']]);
+        $this->middleware('permission:edit-attendance', ['only' => ['index','edit', 'update', 'destroy', 'store']]);
+    }
+    
+
+
     public function index()
     {
         $att = AttendanceModel::all();

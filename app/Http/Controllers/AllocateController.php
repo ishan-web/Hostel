@@ -33,8 +33,6 @@ class AllocateController extends Controller
         $room = Rooms::all();
         $students = StdDetails::all();
         $allocate = Student_Room_Model::all();  
-        // <?php echo '<pre>'; print_r($students); exit; 
-
         return view('admin.allocate.index', compact('room','allocate','students'));
     }
 

@@ -30,8 +30,12 @@
         <div class="card">
           <h5 class="card-header">All Attendance</h5>        
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
+            @can('edit-attendance')
+
             <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Attendance</a>
-            </div>
+            @endcan
+
+          </div>
           <div class="table-responsive text-nowrap">
             <table class="table table-striped" id="myTable">
               <thead>
@@ -65,7 +69,9 @@
                   @endif
 
                   <td>{{ $item->date }}</td>
-                  <td>                    
+                  <td> 
+                  @can('edit-attendance')
+                   
                     <div class="dropdown">
                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="bx bx-dots-vertical-rounded"></i>
@@ -75,7 +81,9 @@
 
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$item->id}}')"><i class="bx bx-trash me-1"></i> Delete</button>
                       </div>
-                    </div>                      
+                    </div>    
+                    @endcan
+                  
                   </td>
                 </tr>              
               @endforeach

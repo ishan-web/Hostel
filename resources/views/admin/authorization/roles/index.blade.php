@@ -22,7 +22,10 @@
         <div class="card">
           <h5 class="card-header">All Roles</h5>        
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
+            @if(Auth::user()->user_type == 'admin')
+
               <a class="btn btn-primary" style="margin: 10px; color:white;" href="{{url('roles/create')}}">Add Roles</a>
+            @endif
             </div>
           <div class="table-responsive text-nowrap">
             <table class="table table-striped">
@@ -39,8 +42,8 @@
                   <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{  ++ $key }}</strong></td>
                   <td>{{ $role->name }}</td>
                   <td>
-                  @if($role->name!=="superadmin")
-                    
+                  @if(Auth::user()->user_type == 'admin')
+
                     <div class="dropdown">
                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="bx bx-dots-vertical-rounded"></i>
@@ -50,8 +53,8 @@
 
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$role->id}}')"><i class="bx bx-trash me-1"></i> Delete</button>
                       </div>
-                    </div>                      
-                    @endif
+                    </div> 
+                    @endif                     
                   </td>
                 </tr>              
               @endforeach

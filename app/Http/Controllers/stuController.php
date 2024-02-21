@@ -10,10 +10,14 @@ class stuController extends Controller
 {
     public function index()
     {
-        $id = Auth::user()->id;
-        $student = StdDetails::where('user_id', $id)->first();
 
-        return view('user.profile.index', compact('student')); // Passed the cost to the view
+        $id = Auth::user()->id;
+        $st_id = StdDetails::getStudent($id);
+
+        $student = StdDetails::where('user_id', $id)->first();
+        $room = StdDetails::getCost($st_id->id);
+
+        return view('user.profile.index', compact('student','room')); 
     }        
 
 

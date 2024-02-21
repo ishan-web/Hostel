@@ -19,7 +19,7 @@
                 <div class="col-md-6 col-xl-6 mb-4">
                     <label for="name" class="col-md-4 col-form-label">Name</label>
                     <div class="col-md-8">
-                        <input id="name" type="text" class="form-control" value="{{ isset($student['name']) ? $student['name'] : '' }}" autofocus>
+                        <input id="name" type="text" class="form-control" readonly value="{{ isset($student['name']) ? $student['name'] : '' }}" autofocus>
                     </div>
 
                 </div>
@@ -29,6 +29,14 @@
                     <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
                     <div class="col-md-8">
                         <input id="address" type="text" class="form-control" name="address" value="{{ $student ? $student->address : '' }}">
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-xl-6 mb-4">
+                    <label for="address" class="col-md-4 col-form-label text-md-right">Monthly Rent</label>
+                    <div class="col-md-8">
+                        <input id="rent" readonly type="text" class="form-control" name="rent" value="Rs. {{ $room ? $room->cost : '' }}">
                     </div>
 
                 </div>

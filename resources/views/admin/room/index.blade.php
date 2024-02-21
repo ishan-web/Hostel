@@ -30,8 +30,11 @@
         <div class="card">
           <h5 class="card-header">All Rooms</h5>        
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
-            <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room</a>
-            </div>
+            @if(Auth::user()->user_type == 'manager')
+                <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room</a>
+            @endif
+
+          </div>
           <div class="table-responsive text-nowrap">
             <table class="table table-striped" id="myTable"> 
               <thead>
@@ -62,7 +65,9 @@
                     Full                  
                   </td>
                   @endif
-                  <td>                    
+                  <td>  
+                  @if(Auth::user()->user_type == 'manager')
+                  
                     <div class="dropdown">
                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="bx bx-dots-vertical-rounded"></i>
@@ -72,7 +77,9 @@
 
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$item->id}}')"><i class="bx bx-trash me-1"></i> Delete</button>
                       </div>
-                    </div>                      
+                    </div>   
+                    @endif
+                   
                   </td>
                 </tr>              
               @endforeach

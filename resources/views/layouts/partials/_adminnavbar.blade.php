@@ -58,6 +58,8 @@
       
             </li>
 
+            @canany(['edit-allocate','view-allocate'])
+
             <li class="menu-item">
               <a href="{{url('allocate')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -65,6 +67,7 @@
               </a>
       
             </li>
+            @endcanany
 
             <li class="menu-item">
               <a href="{{url('student')}}" class="menu-link">

@@ -35,13 +35,14 @@
                 <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#large-modal">Add User</a>
 
             </div>
-            <div class="table-responsive">
-              <table class="table display data-table text-nowrap">
+            <div class="table-responsive" style="padding: 10px;">
+              <table class="table display data-table text-nowrap" id="myTable">
                 <thead>
                   <tr>
                     <th>S no.</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Role</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -53,7 +54,7 @@
                     <td>{{ ++$i }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-
+                    <td>{{ $user->user_type }}</td>
                 
                     <td>
                       <div class="dropdown">
@@ -73,7 +74,8 @@
                     <td>{{ ++$i }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>  
-                    
+                    <td>{{ $user->user_type }}</td>
+
                     @if($user->id==Auth::user()->id)
                     <td>
                     <div class="dropdown">
@@ -91,7 +93,6 @@
                   @endforeach
                 </tbody>
               </table>
-              {!! $data->render() !!}
             </div>
         </div>
       </div>

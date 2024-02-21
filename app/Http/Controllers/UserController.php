@@ -25,7 +25,7 @@ class UserController extends Controller
         Session::put('topmenu','auth');
         Session::put('menu','user');
         $roles = Role::pluck('name','name')->all();
-        $data = User::orderBy('id','DESC')->where('user_type', 'student')->paginate(5);
+        $data = User::orderBy('id','DESC')->get();
 
         // echo'<pre>'; print_r($rooms); exit;
         return view('admin.authorization.users.index',compact('data','roles'))
@@ -67,12 +67,17 @@ class UserController extends Controller
     
         public function update(Request $request, $id)
         {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email,'.$id,
-                'room_id' => 'required'
             ]);
-        
+            if ($validator->fails()) {
+                // Get the validation errors
+                $errors = $validator->errors()->all();
+                
+                // Store errors in session flash data
+                return redirect()->back()->with(['errors' => $errors]);
+            }
             $user = User::find($id);
             $user->name = $request->input('name');
             $user->email = $request->input('email');

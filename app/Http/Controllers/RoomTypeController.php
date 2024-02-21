@@ -56,6 +56,20 @@ class RoomTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+       // Find the allocation record by its ID
+    $type = Room_types::findOrFail($id);
+    
+    // Delete the allocation record
+    $type->delete();
+    
+    // Check if the allocation record was successfully deleted
+    if($type)
+    {
+        return redirect()->to('type')->with('success', 'Type deleted successfully');
+    }
+    else 
+    {
+        return redirect()->to('type')->with('error', 'Type deletion failed');
+    }
     }
 }

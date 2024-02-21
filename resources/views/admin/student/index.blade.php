@@ -34,8 +34,11 @@
           <h5 class="card-header">Student Details</h5>       
 
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
+            @if(Auth::user()->user_type == 'manager')
+
             <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Student</a>
-            </div>
+            @endif
+          </div>
           <div class="table-responsive text-nowrap" style="overflow-x:auto; padding:10px;">
             <table class="table table-striped" id="myTable">
               <thead>
@@ -81,7 +84,9 @@
                     @endif
                   @endforeach
 
-                  <td>                    
+                  <td>   
+                  @if(Auth::user()->user_type == 'manager')
+                 
                     <div class="dropdown">
                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="bx bx-dots-vertical-rounded"></i>
@@ -91,7 +96,8 @@
 
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$item->id}}')"><i class="bx bx-trash me-1"></i> Delete</button>
                       </div>
-                    </div>                      
+                    </div>   
+                    @endif                   
                   </td>
                 </tr>              
               @endforeach
