@@ -21,16 +21,29 @@ class permissioncategoryController extends Controller
 
     public function store(Request $request)
     {
-        $id = $request->id;
-        if($id==""){
-            $percategory = new permissioncategories;
-            $percategory->name = $request->name;
-            return $percategory->save()?redirect()->back()->with('success','Permission Category Added Successfully') : redirect()->back()->with('failure','Permission Category Adding Failed');
-        }else{
-            $percategory = permissioncategories::findOrFail($id);
-            $percategory->name = $request->name;
-            return $percategory->save()?redirect()->back()->with('success','Permission Category Updated Successfully') : redirect()->back()->with('failure','Permission Category Updating Failed');
+        $percategory = new permissioncategories;
+        $percategory->name = $request->name;
+        return $percategory->save()?redirect()->back()->with('success','Permission Category Added Successfully') : redirect()->back()->with('failure','Permission Category Adding Failed');
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $permissionCategory = permissioncategories::findOrFail($id);
+
+        if (!$permissionCategory) {
+            return redirect()->back()->with('error', 'Permission category not found.');
         }
+
+        $permissionCategory->name = $request->input('name');
+
+        $permissionCategory->save();
+
+        return redirect()->back()->with('success', 'Permission category updated successfully.');
     }
 
     public function destroy(string $id)

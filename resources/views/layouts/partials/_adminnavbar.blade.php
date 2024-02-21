@@ -33,7 +33,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="tables-vehicle-list.html" class="menu-link">
+                  <a href="{{url('attendance')}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-table"></i>
                     <div data-i18n="Tables">Attendance</div>
                   </a>

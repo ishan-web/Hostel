@@ -36,8 +36,8 @@
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
             <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Student</a>
             </div>
-          <div class="table-responsive text-nowrap" style="overflow-x:auto">
-            <table class="table table-striped">
+          <div class="table-responsive text-nowrap" style="overflow-x:auto; padding:10px;">
+            <table class="table table-striped" id="myTable">
               <thead>
                 <tr>
                   <th>S no.</th>

@@ -43,12 +43,9 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
                       <div class="dropdown-menu">
-                        @can('percategory-edit')
                           <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="edit('{{$per->id}}','{{$per->name}}')"><i class="bx bx-edit-alt me-1"></i> Edit</button>
-                          @endcan
-                          @can('percategory-delete')
+
                           <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$per->id}}')"><i class="bx bx-trash me-1"></i> Delete</button>
-                        @endcan
                       </div>
                     </div>
                   </td>
@@ -111,6 +108,8 @@
           </div>
           {!! Form::open(array('class'=>'new-added-form','id'=>'edit-form')) !!}
           @csrf
+          @method('patch')
+
             <div class="modal-body">
                 <div class="row gutters-15">
                       <div class="form-group col-6">
@@ -161,14 +160,13 @@
 @section('scripts')
 
 <script type="text/javascript">
-  function edit(id,name){
-  	$('#id').val(id);
+ function edit(id,name){
+    $('#id').val(id);
     $('#name').val(name);
     var form=$('#edit-form');
-        var address='{{url('/percategory')}}'; 
-        form.prop('action',address)
+    var address='{{url('/percategory')}}'+'/'+id;
+    form.prop('action',address)
   }
-
   function destroy(id){
         var form=$('#delete_form');
         var address='{{url('/percategory')}}'+'/'+id;

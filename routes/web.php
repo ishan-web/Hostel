@@ -12,6 +12,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\AllocateController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AttendanceController;
 
 use App\Http\Controllers\feedbackController;
 use App\Http\Controllers\stuController;
@@ -46,6 +47,8 @@ Route::middleware(['auth','isAdmin'])->group(function(){
     Route::resource('type', RoomTypeController::class);
     Route::resource('allocate', AllocateController::class);
     Route::resource('student', StudentController::class);
+    Route::resource('attendance', AttendanceController::class);
+
 
     Route::resource('record', RecordController::class);
 });

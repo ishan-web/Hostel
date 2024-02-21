@@ -27,22 +27,24 @@ class permissionController extends Controller
             'name' => 'required',
             'category' => 'required',
         ]);
-        $id = $request->id;
-        if($id==""){
-            
+       
             $permission = new Permission;
             $permission->name = $request->name;
             $permission->permissioncategory_id= $request->category;
             $permission->guard_name = "web";
             return $permission->save()?redirect()->back()->with('success','Permission created successfully') : redirect()->back()->with('failure','Creating permission failed');
-        }else{
-            $permission = Permission::findOrFail($id);
-            $permission->name = $request->name;
-            $permission->permissioncategory_id= $request->category;
-            $permission->guard_name = "web";
-            return $permission->save()?redirect()->back()->with('success','Permission Edited successfully') : redirect()->back()->with('failure','Editing permission failed');
-        }
+        
     }
+
+    public function update(Request $request, $id)
+{
+
+    $permission = Permission::findOrFail($id);
+    $permission->name = $request->name;
+    $permission->permissioncategory_id= $request->category;
+    $permission->guard_name = "web";
+    return $permission->save()?redirect()->back()->with('success','Permission Edited successfully') : redirect()->back()->with('failure','Editing permission failed');
+}
 
     public function destroy(string $id)
     {

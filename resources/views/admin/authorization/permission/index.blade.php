@@ -126,45 +126,25 @@
           </div>
           {!! Form::open(array('class'=>'new-added-form','id'=>'edit-form')) !!}
           @csrf
-          <input type="hidden" name="id" id="id">
+          @method('patch')
           <div class="modal-body">
-            <div class="row gutters-15">
-                <div class="row">
-                  <div class="col mb-3">
-                    <label for="wheels" class="form-label">Name</label>
-                    <input type="text" id="wheels" class="form-control" placeholder="no. of wheels" />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col mb-3">
-                    <label for="wheels" class="form-label">Number</label>
-                    <input type="text" id="wheels" class="form-control" placeholder="no. of wheels" />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col mb-3">
-                    <label for="wheels" class="form-label">Wheels</label>
-                    <input type="text" id="wheels" class="form-control" placeholder="no. of wheels" />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col mb-3">
-                    <label for="wheels" class="form-label">Category</label>
-                    <input type="text" id="wheels" class="form-control" placeholder="no. of wheels" />
-                  </div>
-                </div>
+                <div class="row gutters-15">
+                    <div class="form-group col-6">
+                        <label for="defaultFormControlInput" class="form-label">Name <span class="text-red">*</span></label>
+                        <input type="text" name="name" value="" id="name" placeholder="Permission Name" class="form-control">
+                    </div>
 
-                <div  class="form-group col-6">
-                  <label for="defaultFormControlInput" class="form-label">Select Category <span style="color:red;">*</span></label>
-                    <select class="form-select" name="category" id="defaultSelect">
-                      <option>Please Select Category</option>
-                      @foreach($percategory as $key=>$category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
-                      @endforeach
-                    </select>
-                </div>
+                    <div class="form-group col-6">
+                        <label for="defaultFormControlInput" class="form-label">Select Category <span class="text-red">*</span></label>
+                        <select class="form-select" name="category" id="category_select">
+                            <option>Please Select Category</option>
+                            @foreach($percategory as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  </div>
             </div>
-          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
               Close
@@ -208,7 +188,7 @@
     $('#name').val(name);
     $('#category_select').val(category).change();
     var form=$('#edit-form');
-        var address='{{url('/permission')}}'; 
+    var address='{{url('/permission')}}'+'/'+id;
         form.prop('action',address)
   }
 

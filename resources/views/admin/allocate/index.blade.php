@@ -34,8 +34,11 @@
           <h5 class="card-header">Students with Rooms</h5>       
 
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
-            <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room</a>
-            </div>
+            @can('edit-allocate')
+                <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room</a>
+            @endcan
+
+          </div>
           <div class="table-responsive text-nowrap">
             <table class="table table-striped">
               <thead>
@@ -69,9 +72,13 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
                       <div class="dropdown-menu">
+                      @can('edit-allocate')
+
                         <a class="dropdown-item" href="{{ route('allocate.edit',$item->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
 
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="destroy('{{$item->id}}')"><i class="bx bx-trash me-1"></i> Delete</button>
+                        @endcan
+
                       </div>
                     </div>                      
                   </td>

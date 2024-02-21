@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Rooms;
 use App\Models\Users;
 use Session;
+use Spatie\Permission\Models\Permission;
+
 use Illuminate\Http\Response; // Import Response class
 
 
@@ -17,6 +19,13 @@ class AllocateController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     function __construct()
+     {
+         $this->middleware('permission:view-allocate', ['only' => ['index']]);
+         $this->middleware('permission:edit-allocate', ['only' => ['index','edit', 'update', 'destroy', 'store']]);
+     }
+     
    
     public function index()
     {

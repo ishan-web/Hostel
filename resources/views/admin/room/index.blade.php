@@ -33,7 +33,7 @@
             <a class="btn btn-primary" style="margin: 10px; color:white;" data-bs-toggle="modal" data-bs-target="#largeModal">Add Room</a>
             </div>
           <div class="table-responsive text-nowrap">
-            <table class="table table-striped">
+            <table class="table table-striped" id="myTable"> 
               <thead>
                 <tr>
                   <th>S no.</th>

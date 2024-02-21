@@ -130,7 +130,7 @@
             {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
           </div>
          
-          <div class="form-group col-6" hidden>
+          <div class="form-group col-6">
             <label>Select Role <span class="text-red">*</span></label>
             {!! Form::select('roles[]', $roles,[], array('class' => 'form-control')) !!}
           </div>
@@ -168,7 +168,7 @@
             <label>Email <span class="text-red">*</span></label>
             {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control','id'=>'email')) !!}
           </div>
-          <div class="form-group col-6" hidden>
+          <div class="form-group col-6">
             <label>Select Role <span class="text-red">*</span></label>
             {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','id'=>'roles')) !!}
           </div>

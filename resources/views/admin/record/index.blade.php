@@ -14,7 +14,7 @@
             <div class="dropdown" style=" display: flex; justify-content: flex-end;">
 
         </div>
-          <div class="table-responsive text-nowrap" style="overflow-x:auto">
+          <div class="table-responsive text-nowrap" style="overflow-x:auto; padding:10px;">
             <table class="table table-striped">
               <thead>
                 <tr>

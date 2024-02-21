@@ -17,6 +17,7 @@
     
     @include('layouts.partials._adminstyle')
     @yield('styles')
+   
 </head>
 
 <body>

@@ -29,3 +29,13 @@
     <script src="{{asset('js/adminjs/main.js')}}"></script>
 
     <script src="{{asset('js/adminjs/dashboards-analytics.js')}}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
+

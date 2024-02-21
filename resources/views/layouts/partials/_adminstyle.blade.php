@@ -17,3 +17,6 @@
     <link rel="stylesheet" href="{{asset('css/admincss/page-icons.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/admincss/page-misc.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+
